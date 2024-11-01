@@ -1,7 +1,13 @@
+import { useState } from "react";
+
 export const Main = () => {
   return (
-    <div>
-      <div>It's the Main page, bruh</div>
-    </div>
+    <>
+      <div>Boolshit</div>
+      <div>Boolshit</div>
+      <div>Boolshit</div>
+      <div>Boolshit</div>
+      <div>Boolshit</div>
+    </>
   );
 };
