@@ -1,5 +1,6 @@
 import { messageStorage } from "@/pages";
 import { useState, ChangeEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const useMessageInput = () => {
   const [message, setMessage] = useState("");
@@ -8,6 +9,7 @@ export const useMessageInput = () => {
     event.preventDefault();
     if (message.trim() === "") return;
     messageStorage.addMessage({
+      id: uuidv4(),
       text: message,
       timestamp: new Date(),
     });

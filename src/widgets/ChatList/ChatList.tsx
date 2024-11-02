@@ -19,9 +19,7 @@ export const ChatList = observer(() => {
     <div className={classes.chat} ref={containerRef}>
       <ul className={classes.messageList}>
         {messages.map((msg) => {
-          return (
-            <UserMessage key={msg.timestamp.getTime()}>{msg.text}</UserMessage>
-          );
+          return <UserMessage key={msg.id}>{msg.text}</UserMessage>;
         })}
       </ul>
     </div>
