@@ -12,7 +12,7 @@ import {
   Drawer,
   Divider,
 } from "@mui/material";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const drawerWidth = 260;
