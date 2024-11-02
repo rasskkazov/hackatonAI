@@ -1,11 +1,12 @@
 import { TMessage } from "@/entities";
-
-const FAVORITE_MOVIES = "movies";
+import { makeAutoObservable } from "mobx";
 
 class MessageStorage {
-  private messages: TMessage[];
+  messages: TMessage[] = [];
+
   constructor() {
-    this.messages = [];
+    makeAutoObservable(this);
+    // this.loadMessages();
   }
 
   getMessages(): TMessage[] {
@@ -13,8 +14,19 @@ class MessageStorage {
   }
 
   addMessage(newMessage: TMessage) {
-    this.messages.push(newMessage);
-    console.log(this.messages);
+    this.messages = [...this.messages, newMessage];
+    // this.saveMessages();
+  }
+
+  private saveMessages() {
+    localStorage.setItem("messages", JSON.stringify(this.messages));
+  }
+
+  private loadMessages() {
+    const savedMessages = localStorage.getItem("messages");
+    if (savedMessages) {
+      this.messages = JSON.parse(savedMessages);
+    }
   }
 }
 

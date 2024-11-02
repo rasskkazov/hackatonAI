@@ -3,7 +3,8 @@ import { FormControl, InputLabel, Input, InputAdornment } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import * as classes from "./MessageInput.module.scss";
 import { useMessageInput } from "./hooks/useMessageInput";
-export const MessageInput = () => {
+import { observer } from "mobx-react";
+export const MessageInput = observer(() => {
   const { message, handleChange, handleSendMessage } = useMessageInput();
 
   return (
@@ -16,8 +17,18 @@ export const MessageInput = () => {
         sx={{ m: 1, width: "100%", fontSize: "16px" }}
         variant="standard"
       >
-        <InputLabel htmlFor="standard-adornment-message">Сообщение</InputLabel>
+        <InputLabel
+          sx={{
+            fontSize: "16px",
+          }}
+          htmlFor="standard-adornment-message"
+        >
+          Сообщение
+        </InputLabel>
         <Input
+          sx={{
+            fontSize: "16px",
+          }}
           id="standard-adornment-message"
           endAdornment={
             <InputAdornment position="end">
@@ -30,4 +41,4 @@ export const MessageInput = () => {
       </FormControl>
     </form>
   );
-};
+});

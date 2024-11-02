@@ -6,14 +6,13 @@ export const useMessageInput = () => {
 
   const handleSendMessage = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (message.trim()) {
-      console.log("Сообщение отправлено:", message);
-      messageStorage.addMessage({
-        text: message,
-        timestamp: new Date(),
-      });
-      setMessage("");
-    }
+    if (message.trim() === "") return;
+    messageStorage.addMessage({
+      text: message,
+      timestamp: new Date(),
+    });
+
+    setMessage("");
   };
 
   const handleChange = (

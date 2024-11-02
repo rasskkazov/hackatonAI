@@ -56,16 +56,6 @@ export const AdaptiveDrawer = ({ header }: Props) => {
           "2Trash",
           "3Spam",
           "4All mail",
-          "5Trash",
-          "6Spam",
-          "7Trash",
-          "8Spam",
-          "9All mail",
-          "0Trash",
-          "-Spam",
-          "12All mail",
-          "13Trash",
-          "14Spam",
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -85,7 +75,7 @@ export const AdaptiveDrawer = ({ header }: Props) => {
       <AppBar
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          position: "fixed",
+
           ml: { sm: `${drawerWidth}px` },
         }}
       >

@@ -1,27 +1,15 @@
+import { messageStorage } from "@/pages";
 import * as classes from "./Chatlist.module.scss";
+import { observer } from "mobx-react";
 
-export const ChatList = () => {
-  const messages = [
-    {
-      text: "hello boys",
-      sender: "user",
-    },
-    {
-      text: "hello gays",
-      sender: "bot",
-    },
-    {
-      text: "hello asdfasdf",
-      sender: "user",
-    },
-  ];
+export const ChatList = observer(() => {
   return (
     <div className={classes.chat}>
       <ul className={classes.messageList}>
-        {messages.map((msg, index) => {
-          return <div key={index}>{msg.text}</div>;
+        {messageStorage.getMessages().map((msg) => {
+          return <div key={msg.timestamp.getTime()}>{msg.text}</div>;
         })}
       </ul>
     </div>
   );
-};
+});
