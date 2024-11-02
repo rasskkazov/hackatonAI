@@ -1,13 +1,27 @@
 import { messageStorage } from "@/pages";
 import * as classes from "./Chatlist.module.scss";
 import { observer } from "mobx-react";
+import { UserMessage } from "@/entities";
+import { useRef, useEffect } from "react";
 
 export const ChatList = observer(() => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const messages = messageStorage.getMessages();
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, [messages]);
+
   return (
-    <div className={classes.chat}>
+    <div className={classes.chat} ref={containerRef}>
       <ul className={classes.messageList}>
-        {messageStorage.getMessages().map((msg) => {
-          return <div key={msg.timestamp.getTime()}>{msg.text}</div>;
+        {messages.map((msg) => {
+          return (
+            <UserMessage key={msg.timestamp.getTime()}>{msg.text}</UserMessage>
+          );
         })}
       </ul>
     </div>

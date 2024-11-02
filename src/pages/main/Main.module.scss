@@ -2,6 +2,17 @@
 
 .chatContainer {
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 60%;
+
+  @include --mobile {
+    width: 100%;
+  }
+}
+
+.chatListContainer {
+  display: flex;
   flex-grow: 1;
 }
 
