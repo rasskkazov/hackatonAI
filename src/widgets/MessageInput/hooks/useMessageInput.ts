@@ -1,3 +1,4 @@
+import { messageStorage } from "@/pages";
 import { useState, ChangeEvent } from "react";
 
 export const useMessageInput = () => {
@@ -7,6 +8,10 @@ export const useMessageInput = () => {
     event.preventDefault();
     if (message.trim()) {
       console.log("Сообщение отправлено:", message);
+      messageStorage.addMessage({
+        text: message,
+        timestamp: new Date(),
+      });
       setMessage("");
     }
   };

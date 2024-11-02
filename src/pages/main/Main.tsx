@@ -1,7 +1,8 @@
 import { ChatList, MessageInput } from "@/widgets";
 import * as classes from "./Main.module.scss";
+import { observer } from "mobx-react";
 
-export const Main = () => {
+export const Main = observer(() => {
   return (
     <div className={classes.container}>
       <div className={classes.chatContainer}>
@@ -12,4 +13,4 @@ export const Main = () => {
       </div>
     </div>
   );
-};
+});

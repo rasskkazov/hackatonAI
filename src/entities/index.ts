@@ -1,1 +1,1 @@
-export { UserMessage } from "./userMessage/ui/UserMessage";
+export { TMessage } from "./message/Message";
