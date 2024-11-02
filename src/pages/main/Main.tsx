@@ -1,13 +1,9 @@
-import { useState } from "react";
+import { MessageInput } from "@/widgets";
 
 export const Main = () => {
   return (
     <>
-      <div>Boolshit</div>
-      <div>Boolshit</div>
-      <div>Boolshit</div>
-      <div>Boolshit</div>
-      <div>Boolshit</div>
+      <MessageInput />
     </>
   );
 };

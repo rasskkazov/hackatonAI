@@ -10,11 +10,12 @@ import {
   IconButton,
   Typography,
   Drawer,
+  Divider,
 } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const drawerWidth = 302;
+const drawerWidth = 260;
 
 interface Props {
   header: ReactNode;
@@ -40,36 +41,43 @@ export const AdaptiveDrawer = ({ header }: Props) => {
   };
 
   const drawer = (
-    <List>
-      {[
-        "All mail",
-        "Trash",
-        "Spam",
-        "1All mail",
-        "2Trash",
-        "3Spam",
-        "4All mail",
-        "5Trash",
-        "6Spam",
-        "7Trash",
-        "8Spam",
-        "9All mail",
-        "0Trash",
-        "-Spam",
-        "12All mail",
-        "13Trash",
-        "14Spam",
-      ].map((text, index) => (
-        <ListItem key={text} disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              {index % 2 === 0 ? <div>Even</div> : <div>Odd</div>}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <Toolbar>
+        <Typography variant="h5">Бухгалтерская отчетность МТС</Typography>
+      </Toolbar>
+      <Divider />
+
+      <List>
+        {[
+          "All mail",
+          "Trash",
+          "Spam",
+          "1All mail",
+          "2Trash",
+          "3Spam",
+          "4All mail",
+          "5Trash",
+          "6Spam",
+          "7Trash",
+          "8Spam",
+          "9All mail",
+          "0Trash",
+          "-Spam",
+          "12All mail",
+          "13Trash",
+          "14Spam",
+        ].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <div>Even</div> : <div>Odd</div>}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 
   return (
@@ -83,7 +91,6 @@ export const AdaptiveDrawer = ({ header }: Props) => {
       >
         <Toolbar>
           <IconButton
-            color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}

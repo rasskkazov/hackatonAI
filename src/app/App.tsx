@@ -8,6 +8,8 @@ import { queryClient } from "@/shared/api/queryClient";
 
 import "@/shared/locales/i18n";
 import "./App.scss";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
 export const App = () => {
   const { t, i18n } = useTranslation();
@@ -15,7 +17,9 @@ export const App = () => {
   return (
     <Suspense fallback="...Loading">
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </QueryClientProvider>
     </Suspense>
   );
