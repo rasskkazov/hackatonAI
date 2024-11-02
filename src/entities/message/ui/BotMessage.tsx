@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const UserMessage = ({ children }: Props) => {
+export const BotMessage = ({ children }: Props) => {
   return (
     <Box
       sx={{
@@ -17,7 +17,7 @@ export const UserMessage = ({ children }: Props) => {
         borderRadius: "20px",
         maxWidth: "80%",
         wordWrap: "break-word",
-        alignSelf: "flex-end",
+        alignSelf: "flex-start",
       }}
     >
       {children}

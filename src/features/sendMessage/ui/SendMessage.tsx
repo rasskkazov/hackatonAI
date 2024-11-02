@@ -8,7 +8,7 @@ interface Props {
 export const SendMessage = ({ disabled = false }: Props) => {
   return (
     <IconButton aria-label="send" type="submit" disabled={disabled}>
-      <SendIcon />
+      <SendIcon sx={{ fontSize: "20px" }} />
     </IconButton>
   );
 };
