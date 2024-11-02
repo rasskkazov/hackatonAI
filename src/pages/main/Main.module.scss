@@ -6,11 +6,15 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 0 5.6rem;
+  padding: 0.8rem 1.6rem;
 }
 
 .messageInputContainer {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.chatContainer {
+  flex: 1;
 }
