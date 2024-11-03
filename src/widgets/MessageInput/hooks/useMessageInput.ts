@@ -26,8 +26,9 @@ export const useMessageInput = () => {
       response.map((res) => {
         messageStorage.addMessage({
           id: uuidv4(),
-          text: res.data,
+          content: res.data,
           timestamp: new Date(),
+          sender: "bot",
         });
       });
 
@@ -43,8 +44,9 @@ export const useMessageInput = () => {
 
     messageStorage.addMessage({
       id: uuidv4(),
-      text: message,
+      content: message,
       timestamp: new Date(),
+      sender: "user",
     });
 
     mutate({ requestMessage: message });

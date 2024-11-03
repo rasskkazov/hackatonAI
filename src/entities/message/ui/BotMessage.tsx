@@ -11,7 +11,7 @@ export const BotMessage = ({ children }: Props) => {
       sx={{
         fontSize: "16px",
         padding: "10px 15px",
-        backgroundColor: "#f0f0f0",
+        border: "1px solid #ccc",
         fontFamily: "Arial, sans-serif",
         color: "#333",
         borderRadius: "20px",

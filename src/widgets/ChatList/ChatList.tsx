@@ -3,6 +3,7 @@ import * as classes from "./Chatlist.module.scss";
 import { observer } from "mobx-react";
 import { UserMessage } from "@/entities";
 import { useRef, useEffect } from "react";
+import { BotMessage } from "@/entities/message/ui/BotMessage";
 
 export const ChatList = observer(() => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,10 @@ export const ChatList = observer(() => {
     <div className={classes.chat} ref={containerRef}>
       <ul className={classes.messageList}>
         {messages.map((msg) => {
-          return <UserMessage key={msg.id}>{msg.text}</UserMessage>;
+          if (msg.sender === "user")
+            return <UserMessage key={msg.id}>{msg.content}</UserMessage>;
+
+          return <BotMessage key={msg.id}>{msg.content}</BotMessage>;
         })}
       </ul>
     </div>
