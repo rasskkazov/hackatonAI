@@ -11,11 +11,10 @@ export const BotMessage = ({ children }: Props) => {
       sx={{
         fontSize: "16px",
         padding: "10px 15px",
-        border: "1px solid #ccc",
         fontFamily: "Arial, sans-serif",
         color: "#333",
         borderRadius: "20px",
-        maxWidth: "80%",
+        width: { xs: "100%", sm: "80%", md: "80%", lg: "80%" },
         wordWrap: "break-word",
         alignSelf: "flex-start",
       }}
