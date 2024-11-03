@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { UserMessage } from "@/entities";
 import { useRef, useEffect } from "react";
 import { BotMessage } from "@/entities/message/ui/BotMessage";
+import { LoadingAnimation } from "@/shared/components";
 
 export const ChatList = observer(() => {
   const containerRef = useRef<HTMLDivElement>(null);

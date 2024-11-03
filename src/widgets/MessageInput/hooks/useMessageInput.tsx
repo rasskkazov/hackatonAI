@@ -4,6 +4,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState, ChangeEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getResponse, TResponse } from "../model/getResponse";
+import { LoadingAnimation } from "@/shared/components";
+import { TMessage } from "@/entities";
 
 export const useMessageInput = () => {
   const [message, setMessage] = useState("");
@@ -18,11 +20,28 @@ export const useMessageInput = () => {
   const { mutate, error, data } = useMutation<
     TResponse[],
     Error,
-    { requestMessage: string }
+    { requestMessage: string },
+    { loadingMessageId: string }
   >({
-    mutationFn: ({ requestMessage }: { requestMessage: string }) =>
-      getResponse({ requestMessage }),
-    onSuccess: (response: TResponse[]) => {
+    mutationFn: ({ requestMessage }: { requestMessage: string }) => {
+      return getResponse({ requestMessage });
+    },
+    onMutate: () => {
+      setIsLoading(true);
+
+      const loadingMessage: TMessage = {
+        id: uuidv4(),
+        content: <LoadingAnimation />,
+        timestamp: new Date(),
+        sender: "bot",
+      };
+
+      const loadingMessageId = loadingMessage.id;
+
+      messageStorage.addMessage(loadingMessage);
+      return { loadingMessageId: loadingMessage.id };
+    },
+    onSuccess: (response: TResponse[], variables, context) => {
       response.map((res) => {
         messageStorage.addMessage({
           id: uuidv4(),
@@ -33,14 +52,16 @@ export const useMessageInput = () => {
       });
 
       setIsLoading(false);
+      if (context?.loadingMessageId) {
+        messageStorage.removeMessage(context.loadingMessageId);
+      }
     },
   });
 
   const handleSendMessage = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (message.trim() === "") return;
 
-    setIsLoading(true);
+    if (message.trim() === "") return;
 
     messageStorage.addMessage({
       id: uuidv4(),
