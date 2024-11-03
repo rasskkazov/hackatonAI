@@ -1,11 +1,13 @@
-import { SendMessage } from "@/features";
+import { CancelRequest, SendMessage } from "@/features";
 import { FormControl, InputLabel, Input, InputAdornment } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import * as classes from "./MessageInput.module.scss";
 import { useMessageInput } from "./hooks/useMessageInput";
 import { observer } from "mobx-react";
+
 export const MessageInput = observer(() => {
-  const { message, handleChange, handleSendMessage } = useMessageInput();
+  const { message, handleChange, handleSendMessage, isLoading } =
+    useMessageInput();
 
   return (
     <form
@@ -32,7 +34,8 @@ export const MessageInput = observer(() => {
           id="standard-adornment-message"
           endAdornment={
             <InputAdornment position="end">
-              <SendMessage />
+              {isLoading && <CancelRequest />}
+              {!isLoading && <SendMessage />}
             </InputAdornment>
           }
           onChange={handleChange}

@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 export type TMessage = {
   id: string;
-  text: string;
+  text: ReactNode;
   timestamp: Date;
 };
