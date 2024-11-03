@@ -42,8 +42,11 @@ export const useMessageInput = () => {
           sender: "bot",
         });
       });
-
       setIsLoading(false);
+    },
+    onError: (error, variables, context) => {
+      setIsLoading(false);
+      console.error(error);
     },
   });
 
