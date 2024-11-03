@@ -1,5 +1,12 @@
 @import "@/shared/styles";
 
 .form {
+  position: relative;
   width: 100%;
+}
+
+.loadingAnimationContainer {
+  position: absolute;
+  top: -20px;
+  left: 16px;
 }

@@ -19,10 +19,6 @@ class MessageStorage {
     // this.saveMessages();
   }
 
-  removeMessage(id: string) {
-    this.messages = this.messages.filter((message) => message.id !== id);
-  }
-
   private saveMessages() {
     localStorage.setItem("messages", JSON.stringify(this.messages));
   }

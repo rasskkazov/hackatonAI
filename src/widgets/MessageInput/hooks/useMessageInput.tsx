@@ -10,6 +10,8 @@ import { TMessage } from "@/entities";
 export const useMessageInput = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [abortController, setAbortController] =
+    useState<AbortController | null>(null);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,26 +22,16 @@ export const useMessageInput = () => {
   const { mutate, error, data } = useMutation<
     TResponse[],
     Error,
-    { requestMessage: string },
-    { loadingMessageId: string }
+    { requestMessage: string }
   >({
     mutationFn: ({ requestMessage }: { requestMessage: string }) => {
-      return getResponse({ requestMessage });
+      const controller = new AbortController();
+      setAbortController(controller);
+
+      return getResponse({ requestMessage }, controller.signal);
     },
     onMutate: () => {
       setIsLoading(true);
-
-      const loadingMessage: TMessage = {
-        id: uuidv4(),
-        content: <LoadingAnimation />,
-        timestamp: new Date(),
-        sender: "bot",
-      };
-
-      const loadingMessageId = loadingMessage.id;
-
-      messageStorage.addMessage(loadingMessage);
-      return { loadingMessageId: loadingMessage.id };
     },
     onSuccess: (response: TResponse[], variables, context) => {
       response.map((res) => {
@@ -52,9 +44,6 @@ export const useMessageInput = () => {
       });
 
       setIsLoading(false);
-      if (context?.loadingMessageId) {
-        messageStorage.removeMessage(context.loadingMessageId);
-      }
     },
   });
 
@@ -75,11 +64,20 @@ export const useMessageInput = () => {
     setMessage("");
   };
 
+  const handleCancelRequest = () => {
+    if (abortController) {
+      abortController.abort();
+      setIsLoading(false);
+      setAbortController(null);
+    }
+  };
+
   return {
     message,
     setMessage,
     handleSendMessage,
     handleChange,
     isLoading,
+    handleCancelRequest,
   };
 };

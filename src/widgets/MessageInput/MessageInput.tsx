@@ -4,10 +4,16 @@ import { ChangeEvent, useState } from "react";
 import * as classes from "./MessageInput.module.scss";
 import { useMessageInput } from "./hooks/useMessageInput";
 import { observer } from "mobx-react";
+import { LoadingAnimation } from "@/shared/components";
 
 export const MessageInput = observer(() => {
-  const { message, handleChange, handleSendMessage, isLoading } =
-    useMessageInput();
+  const {
+    message,
+    handleChange,
+    handleSendMessage,
+    isLoading,
+    handleCancelRequest,
+  } = useMessageInput();
 
   return (
     <form
@@ -34,7 +40,9 @@ export const MessageInput = observer(() => {
           id="standard-adornment-message"
           endAdornment={
             <InputAdornment position="end">
-              {isLoading && <CancelRequest />}
+              {isLoading && (
+                <CancelRequest handleCancelRequest={handleCancelRequest} />
+              )}
               {!isLoading && <SendMessage />}
             </InputAdornment>
           }
@@ -42,6 +50,11 @@ export const MessageInput = observer(() => {
           value={message}
         />
       </FormControl>
+      {isLoading && (
+        <div className={classes.loadingAnimationContainer}>
+          <LoadingAnimation />
+        </div>
+      )}
     </form>
   );
 });
