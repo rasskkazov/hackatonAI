@@ -5,7 +5,7 @@ export type TResponse = {
 };
 
 const getOptions = {
-  method: "GET",
+  method: "POST",
   headers: {
     accept: "application/json",
   },
@@ -18,7 +18,8 @@ export const getResponse = (
   signal?: AbortSignal
 ) => {
   return axiosInstance
-    .get<TResponse[]>("ai", {
+    .post<TResponse[]>("ai", {
+      // .get<TResponse[]>("ai", {
       ...getOptions,
       ...options,
       signal,

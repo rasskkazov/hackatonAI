@@ -5,4 +5,5 @@ type envVarsT = {
 export const envVars: envVarsT = {
   PORT: null,
   TOKEN: null,
+  BACKEND_URL: null,
 };
