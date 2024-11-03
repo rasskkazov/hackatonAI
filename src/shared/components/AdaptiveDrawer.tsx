@@ -1,10 +1,6 @@
 import {
   Toolbar,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Box,
   AppBar,
   IconButton,
@@ -14,6 +10,7 @@ import {
 } from "@mui/material";
 import { ReactNode, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import { ClearChat } from "@/features";
 
 const drawerWidth = 260;
 
@@ -47,25 +44,12 @@ export const AdaptiveDrawer = ({ header }: Props) => {
       </Toolbar>
       <Divider />
 
-      <List>
-        {[
-          "All mail",
-          "Trash",
-          "Spam",
-          "1All mail",
-          "2Trash",
-          "3Spam",
-          "4All mail",
-        ].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <div>Even</div> : <div>Odd</div>}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      <List
+        sx={{
+          pl: "24px",
+        }}
+      >
+        <ClearChat />
       </List>
     </>
   );

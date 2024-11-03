@@ -6,7 +6,7 @@ class MessageStorage {
 
   constructor() {
     makeAutoObservable(this);
-    // this.loadMessages();
+    this.loadMessages();
   }
 
   getMessages(): TMessage[] {
@@ -16,7 +16,7 @@ class MessageStorage {
   addMessage(newMessage: TMessage) {
     this.messages = [...this.messages, newMessage];
 
-    // this.saveMessages();
+    this.saveMessages();
   }
 
   private saveMessages() {
@@ -28,6 +28,11 @@ class MessageStorage {
     if (savedMessages) {
       this.messages = JSON.parse(savedMessages);
     }
+  }
+
+  clearMessages() {
+    this.messages = [];
+    this.saveMessages();
   }
 }
 
